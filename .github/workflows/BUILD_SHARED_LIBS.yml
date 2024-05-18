@@ -1,0 +1,47 @@
+name: Build
+on: [push]
+jobs:
+  windows-2022-build:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: CMake Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -B build
+      - name: CMake Build
+        run: cmake --build build --target webp --config Release
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-2022-build
+          path: build
+          
+  ubuntu-22_04-build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: CMake Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -B build
+      - name: CMake Build
+        run: cmake --build build --target webp --config Release
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ubuntu-22_04-build
+          path: build
+
+  macos-14-build:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: CMake Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -B build
+      - name: CMake Build
+        run: cmake --build build --target webp --config Release
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-14-build
+          path: build
